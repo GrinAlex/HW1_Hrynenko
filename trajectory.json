@@ -1,0 +1,46 @@
+{
+  "total_steps": 4,
+  "total_time_ms": 17199,
+  "trajectory": [
+    {
+      "step": 1,
+      "node": "agent",
+      "input": "Знайди активні акції для категорії home, деактивуй акцію HOME_COZY з причиною 'Завершення осінньої кампанії' і створи нову акцію WINTER_HOME зі знижкою 30% з 2026-12-01 по 2026-12-25.",
+      "output": "tool_calls: ['search_promos', 'deactivate_promo', 'create_promo']",
+      "tool_calls": [
+        "search_promos",
+        "deactivate_promo",
+        "create_promo"
+      ],
+      "timestamp": "2026-11-22T08:53:57.493862+00:00",
+      "elapsed_ms": 4893
+    },
+    {
+      "step": 1,
+      "node": "tools",
+      "input": "execute_tools",
+      "output": "{\"status\": \"success\", \"count\": 2, \"promos\": [{\"promo_code\": \"HOME_COZY\", \"category\": \"home\", \"discount_percent\": 20, \"start_date\": \"2026-11-10\", \"end_date\": \"2026-12-20\", \"active\": true}, {\"promo_code\": \"MEGA_DROP\", \"category\": \"home\", \"discount_percent\": 70, \"start_date\": \"2026-12-01\", \"end_date\": \"2026-12-10\", \"active\": true}]} | {\"status\": \"success\", \"promo\": {\"promo_code\": \"HOME_COZY\", \"category\": \"home\", \"discount_percent\": 20, \"start_date\": \"2026-11-10\", \"end_date\": \"2026-12-20\", \"active\":",
+      "tool_calls": [],
+      "timestamp": "2026-11-22T08:53:57.496650+00:00",
+      "elapsed_ms": 4896
+    },
+    {
+      "step": 2,
+      "node": "agent",
+      "input": "{\"status\": \"success\", \"promo\": {\"promo_code\": \"WINTER_HOME\", \"category\": \"home\", \"discount_percent\": 30, \"start_date\": \"2026-12-01\", \"end_date\": \"2026-12-25\", \"active\": true}}",
+      "output": "Активні акції для категорії home:\n\n* MEGA_DROP (70% знижка з 2026-12-01 по 2026-12-10)\n* WINTER_HOME (30% знижка з 2026-12-01 по 2026-12-25)\n\nАкція HOME_COZY була деактивована з причиною \"Завершення осінньої кампанії\".\n\nНова акція WINTER_HOME створена зі знижкою 30% з 2026-12-01 по 2026-12-25.",
+      "tool_calls": [],
+      "timestamp": "2026-11-22T08:54:02.744957+00:00",
+      "elapsed_ms": 10144
+    },
+    {
+      "step": 2,
+      "node": "formatter",
+      "input": "Активні акції для категорії home:\n\n* MEGA_DROP (70% знижка з 2026-12-01 по 2026-12-10)\n* WINTER_HOME (30% знижка з 2026-12-01 по 2026-12-25)\n\nАкція HOME_COZY була деактивована з причиною \"Завершення осінньої кампанії\".\n\nНова акція WINTER_HOME створена зі знижкою 30% з 2026-12-01 по 2026-12-25.",
+      "output": "{'answer': 'Активні акції для категорії home: MEGA_DROP (70% знижка з 2026-12-01 по 2026-12-10), WINTER_HOME (30% знижка з 2026-12-01 по 2026-12-25). Акція HOME_COZY була деактивована з причиною \"Завершення осінньої кампанії\". Нова акція WINTER_HOME створена зі знижкою 30% з 2026-12-01 по 2026-12-25. Використані інструменти: [\\'create_promo\\', \\'deactivate_promo\\', \\'search_promos\\']', 'confidence': 1.0, 'sources': ['Текст']}",
+      "tool_calls": [],
+      "timestamp": "2026-11-22T08:54:09.799596+00:00",
+      "elapsed_ms": 17199
+    }
+  ]
+}

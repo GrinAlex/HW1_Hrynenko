@@ -1,0 +1,57 @@
+[
+  {
+    "test_id": "TC-001",
+    "complexity": "simple",
+    "query": "Покажи всі активні акції у категорії electronics.",
+    "expected": "Список активних акцій для electronics (включно з TECH_START).",
+    "actual": "У категорії електроніки є одна активна акція: TECH_START. Дискаунт становить 15%, діє з 01.11.2026 по 31.12.2026.",
+    "status": "success",
+    "steps": 2,
+    "tool_calls": [
+      "search_promos"
+    ],
+    "elapsed_ms": 13271
+  },
+  {
+    "test_id": "TC-002",
+    "complexity": "medium",
+    "query": "Перевір активні акції на електроніку та створи нову акцію BLACK_FRIDAY_26 для категорії electronics зі знижкою 25% з 2026-11-25 по 2026-11-30.",
+    "expected": "Виклик search_promos, потім створення BLACK_FRIDAY_26 зі знижкою 25%.",
+    "actual": "Активні акції на електроніку: TECH_START - знижка 15% з 01.11.2026 по 31.12.2026. Нова акція BLACK_FRIDAY_26 створена: Категорія: електроніка. Знижка: 25%. Період дії: з 25.11.2026 по 30.11.2026.",
+    "status": "success",
+    "steps": 2,
+    "tool_calls": [
+      "search_promos",
+      "create_promo"
+    ],
+    "elapsed_ms": 13572
+  },
+  {
+    "test_id": "TC-003",
+    "complexity": "medium",
+    "query": "Створи акцію MEGA_DROP для категорії home зі знижкою 85% (або максимально дозволеною за правилами) з 2026-12-01 по 2026-12-10.",
+    "expected": "Агент дотримується ліміту 70% або виправляє помилку валідації та створює акцію зі знижкою 70%.",
+    "actual": "Так, ми створили акцію MEGA_DROP зі знижкою 70% для категорії home з 2026-12-01 по 2026-12-10.",
+    "status": "success",
+    "steps": 2,
+    "tool_calls": [
+      "create_promo"
+    ],
+    "elapsed_ms": 6629
+  },
+  {
+    "test_id": "TC-004",
+    "complexity": "complex",
+    "query": "Знайди активні акції для категорії home, деактивуй акцію HOME_COZY з причиною 'Завершення осінньої кампанії' і створи нову акцію WINTER_HOME зі знижкою 30% з 2026-12-01 по 2026-12-25.",
+    "expected": "Послідовне виконання search_promos → deactivate_promo(HOME_COZY) → create_promo(WINTER_HOME).",
+    "actual": "Активні акції для категорії home: MEGA_DROP (70% знижка з 2026-12-01 по 2026-12-10), WINTER_HOME (30% знижка з 2026-12-01 по 2026-12-25). Акція HOME_COZY була деактивована з причиною \"Завершення осінньої кампанії\". Нова акція WINTER_HOME створена зі знижкою 30% з 2026-12-01 по 2026-12-25. Використані інструменти: ['create_promo', 'deactivate_promo', 'search_promos']",
+    "status": "success",
+    "steps": 2,
+    "tool_calls": [
+      "search_promos",
+      "deactivate_promo",
+      "create_promo"
+    ],
+    "elapsed_ms": 17200
+  }
+]
